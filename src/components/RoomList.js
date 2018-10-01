@@ -1,63 +1,59 @@
 import React, { Component } from 'react';
 
+
 class RoomList extends Component {
   constructor(props) {
-    super (props);
+    super(props);
     this.state = {
-       rooms: [],
-       newRoomName:""
-     };
-     this.roomsRef = this.props.firebase.database().ref('Rooms');
-     this.handleChange = this.handleChange.bind(this);
-     this.handleSubmit = this.handleSubmit.bind(this);
+      rooms:[],
+      newName: ''
+    };
+    this.roomsRef = this.props.firebase.database().ref('rooms');
   }
-
   componentDidMount() {
     this.roomsRef.on('child_added', snapshot => {
       const room = snapshot.val();
       room.key = snapshot.key;
-      this.setState({ rooms: this.state.rooms.concat( room ) })
-     });
-  }
-
-
-  handleChange(event) {
-    this.setState({newRoomName: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.newRoomName);
-    event.preventDefault();
-    this.roomsRef.push({
-      name: this.state.newRoomName
+      this.setState({ rooms: this.state.rooms.concat( room ) });
+      if (this.state.rooms.length === 1) {this.props.setActiveRoom(room)}
     });
   }
 
+  handleChange(e) {
+    this.setState({ newName: e.target.value });
+  }
+
+  createRoom(newName) {
+    this.roomsRef.push({
+      name: newName,
+      createdAt: Date.now(),
+      });
+      this.setState({ newName: ' '});
+    }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.createRoom(this.state.newName);
+  }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Room Name:
-            <input type="text" name="name" value={this.state.newRoomName}
-            onChange={this.handleChange}/>
-          </label>
-          <input type="submit" value="Create" />
-        </form>
-        <h3>Room List</h3>
-        {
-          this.state.rooms.map((room, index) => {
-            return (
-              <div key={index}>
-                {room.name}
-              </div>
+      <section>
+        <ul className="room-list">
+          {this.state.rooms.map(( room, index ) =>
+            <li key={room.key} onClick={() => this.props.setActiveRoom(room)}>{room.name}</li>
             )
-          })
-        }
-      </div>
+          }
+        </ul>
+        <form className="newChatRoom" onSubmit={(e) => {this.handleSubmit(e)}}>
+          <label>
+            Create New Chat Room :
+            <input type="text" value={this.state.newName} onChange={this.handleChange.bind(this)} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </section>
     )
   }
 }
-
 export default RoomList;
