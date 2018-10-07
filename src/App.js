@@ -22,7 +22,9 @@ class App extends Component {
     super (props);
     this.state = {
       currentRoom: null,
-      currentMessages: 0
+      currentMessages: 0,
+      displayName: '',
+      username:''
     };
   }
 
