@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
-import Username from './components/Username';
+import User from './components/User';
 import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
@@ -23,13 +23,21 @@ class App extends Component {
     this.state = {
       currentRoom: null,
       currentMessages: 0,
-      displayName: '',
+      displayName:'',
       username:''
     };
   }
 
   setActiveRoom(room, message) {
     this.setState({currentRoom: room, currentMesages: message});
+  }
+
+  setUser(user){
+    if(user) {
+      this.setState({username: user.email, displayName: user.displayName})
+    } else {
+      this.setState({username:'', displayName:''})
+    };
   }
 
   render() {
@@ -50,6 +58,13 @@ class App extends Component {
           currentRoom={this.state.currentRoom}
           currentMesages={this.state.currentMesages}
           setActiveRoom={(room, message) => this.setActiveRoom(room, message)}/>
+        </div>
+        <div className="user">
+          <User
+          firebase={firebase}
+          displayName={this.state.displayName}
+          setUser={this.setUser.bind(this)}
+          />
         </div>
       </section>
     );
