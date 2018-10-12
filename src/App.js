@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   setActiveRoom(room, message) {
-    this.setState({currentRoom: room, currentMesages: message});
+    this.setState({currentRoom: room, currentMessages: message});
   }
 
   setUser(user){
