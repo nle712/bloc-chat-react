@@ -38,6 +38,10 @@ class MessgeList extends Component {
     this.setState({newMessage: this.state.messages.filter(message => message.roomId === currentRoom.key)});
   }
 
+  handleChange(e){
+    this.setState({ newMessage: e.target.value })
+  }
+
   render() {
     return(
       <section>
