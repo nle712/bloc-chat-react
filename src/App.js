@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import User from './components/User';
-import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
 
@@ -29,7 +28,7 @@ class App extends Component {
   }
 
   setActiveRoom(room, message) {
-    this.setState({currentRoom: room, currentMesages: message});
+    this.setState({currentRoom: room, currentMessages: message});
   }
 
   setUser(user){
@@ -57,6 +56,7 @@ class App extends Component {
           firebase={firebase}
           currentRoom={this.state.currentRoom}
           currentMesages={this.state.currentMesages}
+          user={this.state.user}
           setActiveRoom={(room, message) => this.setActiveRoom(room, message)}/>
         </div>
         <div className="user">
