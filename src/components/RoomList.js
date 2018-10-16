@@ -27,7 +27,7 @@ class RoomList extends Component {
     this.roomsRef.push({
       name: newName,
       createdAt: Date.now(),
-      });
+    });
       this.setState({ newName: ' '});
     }
 
