@@ -29,7 +29,7 @@ class RoomList extends Component {
       createdAt: Date.now(),
     });
       this.setState({ newName: ' '});
-    }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
