@@ -63,8 +63,7 @@ class App extends Component {
           <User
           firebase={firebase}
           displayName={this.state.displayName}
-          setUser={this.setUser.bind(this)}
-          />
+          setUser={this.setUser.bind(this)}/>
         </div>
       </section>
     );
