@@ -30,9 +30,9 @@ class MessgeList extends Component {
       createdAt: Date.now(),
       roomId: this.props.currentRoom,
       username: this.props.user
-      });
+    });
       this.setState({ newMessage: ' '});
-    }
+  }
 
   displayMessages(currentRoom) {
     this.setState({newMessage: this.state.messages.filter(message => message.roomId === currentRoom.key)});

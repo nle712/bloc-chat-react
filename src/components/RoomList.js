@@ -26,10 +26,10 @@ class RoomList extends Component {
   createRoom(newName) {
     this.roomsRef.push({
       name: newName,
-      createdAt: Date.now(),
-      });
+      createdAt: Date.now()
+    });
       this.setState({ newName: ' '});
-    }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
