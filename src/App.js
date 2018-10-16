@@ -21,14 +21,13 @@ class App extends Component {
     super (props);
     this.state = {
       currentRoom: null,
-      currentMessages: 0,
       displayName:'',
       username:''
     };
   }
 
-  setActiveRoom(room, message) {
-    this.setState({currentRoom: room, currentMessages: message});
+  setActiveRoom(room) {
+    this.setState({currentRoom: room});
   }
 
   setUser(user){
@@ -47,23 +46,25 @@ class App extends Component {
         </header>
         <div className="roomlist">
           <RoomList
-          firebase={firebase}
-          currentRoom={this.state.currentRoom}
-          setActiveRoom={this.setActiveRoom.bind(this)}/>
+            firebase={firebase}
+            currentRoom={this.state.currentRoom}
+            setActiveRoom={this.setActiveRoom.bind(this)}
+          />
         </div>
         <div className="messagelist">
           <MessageList
-          firebase={firebase}
-          currentRoom={this.state.currentRoom}
-          currentMesages={this.state.currentMesages}
-          user={this.state.user}
-          setActiveRoom={(room, message) => this.setActiveRoom(room, message)}/>
+            firebase={firebase}
+            currentRoom={this.state.currentRoom}
+            currentMesages={this.state.currentMesages}
+            username={this.state.username}
+          />
         </div>
         <div className="user">
           <User
-          firebase={firebase}
-          displayName={this.state.displayName}
-          setUser={this.setUser.bind(this)}/>
+            firebase={firebase}
+            displayName={this.state.displayName}
+            setUser={this.setUser.bind(this)}
+          />
         </div>
       </section>
     );
